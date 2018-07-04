@@ -26,3 +26,14 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.content-grid {
+  max-width: 960px;
+  height: 100%;
+}
+
+.mdl-cell {
+  padding: 20px;
+  background-color: #f3f3f3;
+  height: 100%;
+}
