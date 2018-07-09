@@ -22,7 +22,7 @@ class App extends Component {
   render() {
     return (
       <aside>
-        <div className="App">
+        <div className="App">Bloc Chat
           <RoomList firebase={firebase}/>
         </div>
       </aside>
