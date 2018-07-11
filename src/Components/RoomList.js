@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 //import * as firebase from 'firebase';
 
 class RoomList extends Component {
-  constructor(props){
-    super(props);
+    constructor(props){
+        super(props);
 
 
         this.state = {
@@ -60,15 +60,11 @@ class RoomList extends Component {
         );
 
         const roomList = this.state.rooms.map((room) => 
-           <div key={room.key}>{room.name}</div>
+           <li key={room.key} onClick={(event) => this.props.activeRoom( room, event )}>{room.name}</li>
          );
         return (
-          <div className='content-grid mdl-grid'>
-            <div className='mdl-cell mdl-cell--3-col'>Add Rooms: {form}, Chat Rooms:{roomList}
-            </div>
-            <ul></ul>
-            <div className='mdl-cell mdl-cell--9-col'>
-            </div>
+          <div >
+          <ul>Add Rooms: {form} Chat Rooms:{roomList}</ul>
           </div>
         );
     }
