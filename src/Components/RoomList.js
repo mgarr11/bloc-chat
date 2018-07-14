@@ -19,29 +19,19 @@ class RoomList extends Component {
     }
 
     changeRoom (event) {
-        //event.preventDefault();
         this.setState({ name: event.target.value });
 
     }
 
     addRoom (event) {
         event.preventDefault();
-        //if (!this.state.roomName) {return}
-        //const newRoomName = this.state.rooms === //.arr(rooms => this.state.newRoomName === rooms);
-        //const newRoomName = 
-        //this.roomsRef.name = newRoomName; // moved up oneline
         this.roomsRef.push({ name: this.state.name });
-        //this.roomsRef.addRoom ();
-        //this.roomsRef.name = newRoomName;
-        this.setState({name: ""});// replaced `rooms.target.value` with `newRoomName`
-        //console.log (newRoomName); 
-
+        this.setState({name: ""});
 
     }
 
     componentDidMount() {
         this.roomsRef.on('child_added', snapshot => {
-            //var room = { data: snapshot.val(), key: snapshot.key };
             const room = snapshot.val();
             room.key = snapshot.key;
             this.setState({ rooms: this.state.rooms.concat( room ) })
@@ -60,11 +50,11 @@ class RoomList extends Component {
         );
 
         const roomList = this.state.rooms.map((room) => 
-           <li key={room.key} onClick={(event) => this.props.activeRoom( room, event )}>{room.name}</li>
+           <li key={room.key} onClick={() => this.props.setActiveRoom( room)}>{room.name}</li>
          );
         return (
           <div >
-          <ul>Add Rooms: {form} Chat Rooms:{roomList}</ul>
+          <ul>Available chat rooms:{roomList} Create a new room: {form} </ul>
           </div>
         );
     }

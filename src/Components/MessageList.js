@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+//import RoomList from './RoomList';
 
 class MessageList extends Component {
     constructor(props){
@@ -21,7 +22,7 @@ class MessageList extends Component {
             e.preventDefault();
             this.setState({
                 content: e.target.value,
-                roomId: this.props.activeRoom
+                roomId: this.props.setActiveRoom
             })
         }
 
@@ -31,7 +32,7 @@ class MessageList extends Component {
                 username: this.state.username,
                 content: this.state.content,
                 sentAt: this.state.sentAt,
-                roomId: this.props.activeRoom
+                roomId: this.state.roomId
             });
 
             this.setState({ username: "", content: "", sentAt: "", roomId: "" })
@@ -41,7 +42,6 @@ class MessageList extends Component {
         
         componentDidMount() {
             this.messagesRef.on('child_added', snapshot => {
-                //var room = { data: snapshot.val(), key: snapshot.key };
                 const message = snapshot.val();
                 message.key = snapshot.key;
                 this.setState({ messages: this.state.messages.concat( message ) })
@@ -51,8 +51,6 @@ class MessageList extends Component {
 
     render () {
 
-        const activeRoom = this.props.activeRoom;
-
         const form = (
             <form onSubmit={this.createMessage}>
                 <input type="text" value={this.state.content} onChange={this.handleChange}/>
@@ -61,7 +59,7 @@ class MessageList extends Component {
         );
 
         const MessageList = ( this.state.messages.map((message ) => {
-            if (message.roomId === activeRoom) {
+            if (message.roomId === this.props.setActiveRoom) {
                 return <li key={message.key}> {message.content}</li>
             }
             return null; 

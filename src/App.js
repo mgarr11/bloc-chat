@@ -6,9 +6,7 @@ import * as firebase from 'firebase';
 import RoomList  from './Components/RoomList';
 import MessageList from './Components/MessageList';
 
-//src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"
 
-  // Initialize Firebase
   var config = {
     apiKey: "AIzaSyAqQJCZ4DyQtAO8TQTtj8mBWgBTpwrlijk",
     authDomain: "bloc-chat-685f3.firebaseapp.com",
@@ -26,11 +24,11 @@ class App extends Component {
       activeRoom: "",
       activeMessages: []
     };
-    this.activeRoom=this.activeRoom.bind(this);
-    //this.activeMessages=this.activeMessages.bind(this);
+    this.setActiveRoom = this.setActiveRoom.bind(this);
   }
 
-  activeRoom (room) {
+
+  setActiveRoom(room) {
     this.setState({ activeRoom: room });
   }
 
@@ -43,11 +41,14 @@ class App extends Component {
       <div >
         <h3>Bloc Chat</h3>
         <div className='content-grid mdl-grid' >
-          <div className='mdl-cell mdl-cell--3-col'>
-            <RoomList firebase={firebase} activeRoom={this.activeRoom}/>
+          <div className='mdl-cell mdl-cell--3-col'> 
+            <RoomList firebase={firebase} setActiveRoom={this.setActiveRoom}/>
           </div>
           <div className='mdl-cell mdl-cell--9-col'>
-          <MessageList firebase={firebase} activeRoom={this.state.activeRoom} activeMessages={this.state.activeMessages}/>
+          <h4>{!this.state.activeRoom.name ? "Select or create a room" : this.state.activeRoom.name}</h4>
+          { this.state.activeRoom ?
+        (<MessageList firebase={firebase} setActiveRoom={this.state.activeRoom.key} />) : (null)
+        }
           </div>
         </div>
       </div>
