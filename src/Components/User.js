@@ -39,7 +39,7 @@ class User extends Component {
 
     render () {
         return (
-            <div>{(this.props.currentUser ? this.props.currentUser.displayName : "Sign in or Sign-up to Chat!")}
+            <div>{this.props.currentUser ? this.props.currentUser.displayName : "Sign in or Sign-up to Chat!"}
                 <button onClick={this.handleSignIn} onChange={(user)=> this.handlChange(user)}> 
                     {
                         (this.props.currentUser)=== null ? 

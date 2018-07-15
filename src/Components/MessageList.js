@@ -31,7 +31,8 @@ class MessageList extends Component {
         createMessage(e) {
             e.preventDefault();
             this.messagesRef.push({ 
-                username: this.state.username,
+                //username: this.state.username,
+                username: this.props.user ? this.props.user.displayName : "Guest",
                 content: this.state.content,
                 sentAt: this.state.sentAt,
                 roomId: this.state.roomId
@@ -62,7 +63,7 @@ class MessageList extends Component {
 
         const MessageList = ( this.state.messages.map((message ) => {
             if (message.roomId === this.props.setActiveRoom) {
-                return <li key={message.key}> {message.content}</li>
+                return <p key={message.key}> {message.username} : {message.content} </p>
             }
             return null; 
         })
@@ -70,8 +71,8 @@ class MessageList extends Component {
          
 
             return (
-                <div> Write a message: {form}
-                    <ul>{MessageList}</ul>
+                <div> {MessageList}
+                    <div>Write a message: {form}</div>
                 </div>
             );
         }

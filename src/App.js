@@ -50,14 +50,12 @@ class App extends Component {
         <User firebase={firebase} setUser={this.setUser} currentUser={this.state.user}/>
         <div className='content-grid mdl-grid' >
           <div className='mdl-cell mdl-cell--3-col'> 
-            <RoomList firebase={firebase} setActiveRoom={this.setActiveRoom}/>
+            <RoomList firebase={firebase} setActiveRoom={this.setActiveRoom} currentUser={this.state.user}/>
  
           </div>
           <div className='mdl-cell mdl-cell--9-col'>
           <h4>{!this.state.activeRoom.name ? "Select or create a room" : this.state.activeRoom.name}</h4>
-          { this.state.activeRoom ?
-        (<MessageList firebase={firebase} setActiveRoom={this.state.activeRoom.key} currentUser={this.state.user.displayName}/>) : (null)
-        }
+          <MessageList firebase={firebase} setActiveRoom={this.state.activeRoom.key} user={this.state.user} />
           </div>
         </div>
       </div>
