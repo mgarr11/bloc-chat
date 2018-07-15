@@ -5,6 +5,7 @@ import './App.css';
 import * as firebase from 'firebase';
 import RoomList  from './Components/RoomList';
 import MessageList from './Components/MessageList';
+import User from './Components/User';
 
 
   var config = {
@@ -22,9 +23,11 @@ class App extends Component {
     super(props);
     this.state = {
       activeRoom: "",
-      activeMessages: []
+      activeMessages: [],
+      user: ""
     };
     this.setActiveRoom = this.setActiveRoom.bind(this);
+    this.setUser=this.setUser.bind(this);
   }
 
 
@@ -35,19 +38,25 @@ class App extends Component {
   activeMessages (message) {
     this.setState({ activeMessages: message });
   }
+
+  setUser (user) {
+    this.setState({ user: user });
+  }
     
   render() {
     return (
       <div >
         <h3>Bloc Chat</h3>
+        <User firebase={firebase} setUser={this.setUser} currentUser={this.state.user}/>
         <div className='content-grid mdl-grid' >
           <div className='mdl-cell mdl-cell--3-col'> 
             <RoomList firebase={firebase} setActiveRoom={this.setActiveRoom}/>
+ 
           </div>
           <div className='mdl-cell mdl-cell--9-col'>
           <h4>{!this.state.activeRoom.name ? "Select or create a room" : this.state.activeRoom.name}</h4>
           { this.state.activeRoom ?
-        (<MessageList firebase={firebase} setActiveRoom={this.state.activeRoom.key} />) : (null)
+        (<MessageList firebase={firebase} setActiveRoom={this.state.activeRoom.key} currentUser={this.state.user.displayName}/>) : (null)
         }
           </div>
         </div>

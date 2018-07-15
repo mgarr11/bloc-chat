@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 //import RoomList from './RoomList';
+//import User from './User.js'
 
 class MessageList extends Component {
     constructor(props){
@@ -22,7 +23,8 @@ class MessageList extends Component {
             e.preventDefault();
             this.setState({
                 content: e.target.value,
-                roomId: this.props.setActiveRoom
+                roomId: this.props.setActiveRoom,
+                username: this.props.currentUser
             })
         }
 
